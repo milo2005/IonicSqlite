@@ -1,0 +1,29 @@
+<ion-header>
+  
+    <ion-navbar color="primary">
+      <ion-title>Agregar Planeta</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <form #form="ngForm">
+  
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input name="nombre" type="text" [(ngModel)]="planeta.nombre" required></ion-input>
+      </ion-item>
+  
+      <ion-item margin-bottom>
+        <ion-label floating>Gravedad</ion-label>
+        <ion-input name="gravedad" type="number" [(ngModel)]="planeta.gravedad" required></ion-input>
+      </ion-item>
+  
+      <button ion-button block full margin-top (click)="save()" [disabled]="!form.valid"> Guardar </button>
+  
+    </form>
+  
+  </ion-content>
+  
