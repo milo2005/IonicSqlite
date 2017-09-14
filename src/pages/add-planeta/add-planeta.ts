@@ -9,14 +9,15 @@ import { Planeta } from '../../providers/planeta/planeta';
 })
 export class AddPlanetaPage {
 
-  planeta:Planeta;
+  planeta: Planeta;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public dao:PlanetaDaoProvider) {
-    this.planeta =  new Planeta();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dao: PlanetaDaoProvider) {
+    this.planeta = new Planeta();
   }
 
-  save(){
-    
+  save() {
+    this.dao.insert(this.planeta)
+      .then(res => this.navCtrl.pop());
   }
 
 }

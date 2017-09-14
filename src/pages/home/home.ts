@@ -10,11 +10,16 @@ import { Planeta } from '../../providers/planeta/planeta';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public dao:PlanetaDaoProvider) {}
+  planetas: Planeta[] = [];
 
-  loadPlanetas(){}
+  constructor(public navCtrl: NavController, public dao: PlanetaDaoProvider) { }
 
-  goToAdd(){
+  loadPlanetas() {
+    this.dao.all()
+      .then(data => this.planetas = data);
+  }
+
+  goToAdd() {
     this.navCtrl.push(AddPlanetaPage);
   }
 
