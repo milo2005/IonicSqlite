@@ -9,8 +9,17 @@ export class PlanetaDaoProvider {
 
   db: SQLiteObject;
 
-  constructor(public con: DatabaseConnectionProvider) {
-    con.getConnection().then(db => this.db = db);
+  constructor(public con: DatabaseConnectionProvider) {}
+
+  ready(): Promise<boolean> {
+    if (this.db) {
+      return Promise.resolve(true);
+    } else {
+      return this.con.getConnection().then(db => {
+        this.db = db;
+        return Promise.resolve(true);
+      });
+    }
   }
 
   insert(planeta: Planeta) {
@@ -41,9 +50,9 @@ export class PlanetaDaoProvider {
 
   all(): Promise<Planeta[]> {
     const sql = "SELECT *  FROM planeta";
-    return this.db.executeSql(sql, []).then(results=>{
+    return this.db.executeSql(sql, []).then(results => {
       let data = [];
-      for(let i = 0; i<results.rows.length; i++){
+      for (let i = 0; i < results.rows.length; i++) {
         const planeta = results.rows.item(i);
         data.push(planeta);
       }

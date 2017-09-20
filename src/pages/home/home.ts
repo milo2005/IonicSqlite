@@ -23,4 +23,10 @@ export class HomePage {
     this.navCtrl.push(AddPlanetaPage);
   }
 
+  //Se invoca cada que la pantalla es visible
+  ionViewDidEnter() {
+    this.dao.ready()
+      .then(() => this.loadPlanetas());
+  }
+
 }

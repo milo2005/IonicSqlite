@@ -8,11 +8,13 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DatabaseConnectionProvider } from '../providers/database-connection/database-connection';
 import { PlanetaDaoProvider } from '../providers/planeta/planeta-dao';
+import { AddPlanetaPage } from '../pages/add-planeta/add-planeta';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    AddPlanetaPage
   ],
   imports: [
     BrowserModule,
@@ -21,14 +23,15 @@ import { PlanetaDaoProvider } from '../providers/planeta/planeta-dao';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    AddPlanetaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     DatabaseConnectionProvider,
     PlanetaDaoProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

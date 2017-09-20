@@ -9,10 +9,10 @@ export class DatabaseConnectionProvider {
   constructor() { }
 
   getConnection(): Promise<SQLiteObject> {
-    const sqlite = new SQLite();
     if(this.db){
       return Promise.resolve(this.db);
     }else{
+      const sqlite = new SQLite();
       return sqlite.create({
         name: 'planetas.db',
         location: 'default'
@@ -27,22 +27,12 @@ export class DatabaseConnectionProvider {
 
   init():Promise<any> {
     const sql = "CREATE TABLE IF NOT EXISTS planeta ("
-      + "id PRIMARY KEY AUTOINCREMENT"
+      + "id INTEGER PRIMARY KEY AUTOINCREMENT"
       + ", nombre VARCHAR"
       + ", gravedad FLOAT"
       + ")";
-    return this.getConnection().then(db => {
-      db.executeSql(sql, []).then(res => {
-        return Promise.resolve(res);
-      })
-    });
+    return this.db.executeSql(sql, []);    
   }
 
-  executeSql(sql:string, params:any[]):Promise<any>{
-    if(this.db!=null)
-      return this.db.executeSql(sql, params);
-    else
-      return Promise.reject("no connected");  
-  }
 
 }
